@@ -39,12 +39,50 @@ namespace Full_GRASP_And_SOLID
 
         private static void AddProductToCatalog(string description, double unitCost)
         {
-            productCatalog.Add(new Product(description, unitCost));
+            try
+            {
+                if(description == "")
+                {
+                    throw new NameEmpty("La descripción está vacía");
+                }
+                if(unitCost < 0)
+                {
+                    throw new LessThanZero("El costo es invalido por ser menor a 0");
+                }
+                productCatalog.Add(new Product(description, unitCost));
+            }
+            catch (NameEmpty e)
+            {
+                Console.WriteLine(e.Message);
+            }  
+            catch (LessThanZero f)
+            {
+                Console.WriteLine(f.Message);
+            }
         }
 
         private static void AddEquipmentToCatalog(string description, double hourlyCost)
         {
-            equipmentCatalog.Add(new Equipment(description, hourlyCost));
+            try
+            {
+                if(description == "")
+                {
+                    throw new NameEmpty("La descripción está vacía");
+                }
+                if(hourlyCost < 0)
+                {
+                    throw new LessThanZero("El costo es invalido por ser menor a 0");
+                }
+                equipmentCatalog.Add(new Equipment(description, hourlyCost));
+            }
+            catch (NameEmpty e)
+            {
+                Console.WriteLine(e.Message);
+            } 
+            catch (LessThanZero f)
+            {
+                Console.WriteLine(f.Message);
+            }
         }
 
         private static Product ProductAt(int index)
