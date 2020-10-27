@@ -27,6 +27,7 @@ namespace Full_GRASP_And_SOLID
             recipe.PrintRecipe();
         }
 
+        //Invariante, los productos del catalogo no varían sin cambiar el código.
         private static void PopulateCatalogs()
         {
             AddProductToCatalog("Café", 100);
@@ -37,6 +38,8 @@ namespace Full_GRASP_And_SOLID
             AddEquipmentToCatalog("Hervidor", 2000);
         }
 
+        //Precondición: description no debe ser un string vacio, ni el hourlyCost menor a 0.
+        //Postcondición: productCatalog tendrá un elemento más.
         private static void AddProductToCatalog(string description, double unitCost)
         {
             try
@@ -61,6 +64,8 @@ namespace Full_GRASP_And_SOLID
             }
         }
 
+        //Precondición: description no debe ser un string vacio, ni el hourlyCost menor a 0.
+        //Postcondición: productCatalog tendrá un elemento más.
         private static void AddEquipmentToCatalog(string description, double hourlyCost)
         {
             try
@@ -85,22 +90,30 @@ namespace Full_GRASP_And_SOLID
             }
         }
 
+        //Pre-condición: Debe haber un objeto Product en el indice dado.
+        //Post-condición: Se devuelve el objeto Product que se encontraba en ese indice.
         private static Product ProductAt(int index)
         {
             return productCatalog[index] as Product;
         }
 
+        //Pre-condición: Debe haber un objeto Equipment en el indice dado.
+        //Post-condición: Se devuelve el objeto Equipment que se encontraba en ese indice.
         private static Equipment EquipmentAt(int index)
         {
             return equipmentCatalog[index] as Equipment;
         }
 
+        //Pre-condición: Debe haber un objeto Product con el description pasado por parametro.
+        //Post-condición: Se devuelve el objeto Product con el description pasado por parametro        
         private static Product GetProduct(string description)
         {
             var query = from Product product in productCatalog where product.Description == description select product;
             return query.FirstOrDefault();
         }
 
+        //Pre-condición: Debe haber un objeto Equipment con el description pasado por parametro.
+        //Post-condición: Se devuelve el objeto Equipment con el description pasado por parametro   
         private static Equipment GetEquipment(string description)
         {
             var query = from Equipment equipment in equipmentCatalog where equipment.Description == description select equipment;
